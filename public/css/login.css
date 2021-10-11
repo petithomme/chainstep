@@ -1,0 +1,91 @@
+html, body {
+    margin:0px;
+    height:100%;
+}
+
+#container {
+    background: linear-gradient(120deg, rgb(56, 168, 226), rgb(12, 99, 187));
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+#form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: max-content;
+}
+
+#loginBackground {
+    width: 20%;
+    height: 50%;
+    background-color: aliceblue;
+    border-color: rgb(0, 40, 102);
+    border-width: 0.1rem;
+    border-style: solid;
+    border-radius: 1.5rem;
+    margin-top: 12.5%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#loginTitle {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    font-size: 3rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: rgb(12, 99, 187);
+}
+
+input {
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 1.25rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+#userNameLogin, #passwordLogin  {
+    margin-top: 15%;
+    margin-bottom: 2%;
+    border: 0;
+    border-bottom: 0.15rem solid rgb(12, 99, 187);;
+}
+
+#validateButton {
+    margin-top: 20%;
+    background-color: rgb(12, 99, 187);
+    border-color: rgb(0, 40, 102);
+    padding: 5% 20%;
+    border-width: 0.1rem;
+    border-style: solid;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+#validate {
+    text-align: center;
+    font-size: 1.25rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: aliceblue;
+    cursor: pointer;
+}
+
+#validateButton:hover {
+    background: rgb(56, 168, 226);
+}
+
+#notRegistered {
+    margin-top: 10%;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}

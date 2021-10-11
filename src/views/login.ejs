@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../public/css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="container">
+        <div id="loginBackground">
+            <div id="loginTitle"> Login </div>
+            <form id="form" name="login" method="POST" action=<%= url+'/login' %> >
+                <div id="userNameLogin">
+                    <input id="username" name="username" type="text" placeholder="Username">
+                </div>
+                <div id="passwordLogin">
+                    <input id="password" name="password" type="password" placeholder="Password">
+                </div>
+                <div id="validateButton">
+                    <input id="validate" type="submit" value="Login">
+                </div>
+
+            </form>
+            <div id="notRegistered">
+                Don't have an account ? <a href=<%= url %>>Sign up</a>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+</html>
