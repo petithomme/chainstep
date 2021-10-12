@@ -13,30 +13,38 @@ html, body {
     margin: 0 auto;
 }
 
-#form {
+#loginForm, #createuserForm {
     display: flex;
     align-items: center;
     flex-direction: column;
     width: max-content;
 }
 
+#createUserBackground {
+    height: 60%;
+    margin-top: 5%;
+}
+
 #loginBackground {
-    width: 20%;
     height: 50%;
+    margin-top: 10%;
+}
+
+#loginBackground, #createUserBackground {
+    width: 20%;
     background-color: aliceblue;
     border-color: rgb(0, 40, 102);
     border-width: 0.1rem;
     border-style: solid;
     border-radius: 1.5rem;
-    margin-top: 12.5%;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-#loginTitle {
+#loginTitle, #createUserTitle {
     margin-top: 10%;
-    margin-bottom: 10%;
+    margin-bottom: 7%;
     font-size: 3rem;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
@@ -44,15 +52,24 @@ html, body {
 }
 
 input {
+    font-size: 1.25rem;
+}
+
+input, #createUserButton, #showLogin {
     outline: none;
     border: none;
     background: none;
-    font-size: 1.25rem;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
 }
 
-#userNameLogin, #passwordLogin  {
+#createUserButton, #showLogin {
+    cursor: pointer;
+    color: rgb(12, 99, 187);
+    font-size: 1rem;
+}
+
+.userName, .password, #email  {
     margin-top: 15%;
     margin-bottom: 2%;
     border: 0;
@@ -70,7 +87,7 @@ input {
     cursor: pointer;
 }
 
-#validate {
+.validate {
     text-align: center;
     font-size: 1.25rem;
     font-family: 'Roboto', sans-serif;
@@ -83,9 +100,15 @@ input {
     background: rgb(56, 168, 226);
 }
 
-#notRegistered {
+#notRegistered, #alreadyRegistered {
     margin-top: 10%;
     font-size: 1rem;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
+}
+
+#createUserBackground {
+    display: none;
+    opacity: 0;
+    margin-top: 25%;
 }

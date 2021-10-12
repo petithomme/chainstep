@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 const loginController: LoginController = new LoginController();
+
 app.post('/createUser', async function (req: Request, res: Response) {
     await loginController.createUser(<string>req.body.username, <string>req.body.password, <string>req.body.email);
     res.status(200).json({error: ""});
@@ -33,6 +34,7 @@ app.post('/login', async function (req: Request, res: Response) {
         res.status(200).json({error: "", token});
     }
 });
+
 app.get('/', function (req: Request, res: Response) {
     res.render("login", {url: req.protocol + '://' + req.get('host')});
 });

@@ -1,35 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
     <link rel="stylesheet" href="../../public/css/login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <div id="container">
         <div id="loginBackground">
             <div id="loginTitle"> Login </div>
-            <form id="form" name="login" method="POST" action=<%= url+'/login' %> >
-                <div id="userNameLogin">
-                    <input id="username" name="username" type="text" placeholder="Username">
+            <form id="loginForm" name="login" method="POST" action=<%= url+'/login' %> >
+                <div class="userName">
+                    <input name="username" type="text" placeholder="Username">
                 </div>
-                <div id="passwordLogin">
-                    <input id="password" name="password" type="password" placeholder="Password">
+                <div class="password">
+                    <input name="password" type="password" placeholder="Password">
                 </div>
                 <div id="validateButton">
-                    <input id="validate" type="submit" value="Login">
+                    <input class="validate" type="submit" value="Login">
                 </div>
 
             </form>
             <div id="notRegistered">
-                Don't have an account ? <a href=<%= url %>>Sign up</a>
+                Don't have an account ? <button id="createUserButton" onclick="startShowCreateUser()"> Signup </button>
             </div>
+            <script>
+                function startShowCreateUser() {
+                    TweenMax.to("#loginBackground", 0.1, {opacity:0, display:"none", marginTop: '0%'});
+                    TweenMax.delayedCall(0.2, showCreateUser);
+                }
 
+                function showCreateUser() {
+                    TweenMax.to("#createUserBackground", 0.1, {opacity:1, display:"flex", marginTop: '10%'});
+                }
+
+                //////
+                function startShowLogin() {
+                    TweenMax.to("#createUserBackground", 0.1, {opacity:0, display:"none", marginTop: '20%'});
+                    TweenMax.delayedCall(0.2, showLogin);
+                }
+
+                function showLogin() {
+                    TweenMax.to("#loginBackground", 0.1, {opacity:1, display:"flex", marginTop: '10%'});
+                }
+            </script>
         </div>
-    </div>
+        <div id="createUserBackground">
+            <div id="createUserTitle"> Create user </div>
+            <form id="createuserForm" name="createUser" method="POST" action=<%= url+'/createUser' %> >
+                <div class="userName">
+                    <input name="username" type="text" placeholder="Username">
+                </div>
+                <div class="password">
+                    <input name="password" type="password" placeholder="Password">
+                </div>
+                <div id="email">
+                    <input name="email" type="email" placeholder="Email">
+                </div>
+                <div id="validateButton">
+                    <input class="validate" type="submit" value="Create">
+                </div>
+            </form>
+            <div id="alreadyRegistered">
+                Have an account ? <button id="showLogin" onclick="startShowLogin()"> Go back </button>
+            </div>
+        </div>
 
+    </div>
 
 </body>
 </html>
