@@ -3,12 +3,13 @@
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
     <link rel="stylesheet" href="../../public/css/login.css">
+    <link rel="stylesheet" href="../../public/css/global.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="container">
+    <div class="container">
         <div id="loginBackground">
             <div id="loginTitle"> Login </div>
             <form id="loginForm" name="login" method="POST" action=<%= url+'/login' %> >
@@ -49,7 +50,7 @@
         </div>
         <div id="createUserBackground">
             <div id="createUserTitle"> Create user </div>
-            <form id="createuserForm" name="createUser" method="POST" action=<%= url+'/createUser' %> >
+            <form id="createUserForm" name="createUser" method="POST" action=<%= url+'/createUser' %> >
                 <div class="userName">
                     <input name="username" type="text" placeholder="Username">
                 </div>

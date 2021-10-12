@@ -1,0 +1,14 @@
+html, body {
+    margin:0px;
+    height:100%;
+}
+
+.container {
+    background: linear-gradient(120deg, rgb(56, 168, 226), rgb(12, 99, 187));
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+}
