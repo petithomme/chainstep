@@ -4,20 +4,25 @@ import {RawData, WebSocketServer} from 'ws';
 export class ChatController {
 
     private messages: string[] = [];
+    private wss: WebSocketServer;
 
-    public createChatsServer(): void {
-        const wss = new WebSocketServer({
+    constructor() {
+        this.wss = new WebSocketServer({
             port: 5001, perMessageDeflate: false
         });
-        wss.on('connection', (ws: WebSocket) => {
+        this.wss.on('connection', (ws: WebSocket) => {
             ws.on('message', (message: RawData) => {
-                const messageAsString: string = message.toString();
-                this.messages.push(messageAsString);
-                wss.clients.forEach((client) => {
-                   client.send(JSON.stringify({message : messageAsString}));
-                });
+                this.forwardMessage(message.toString());
             });
+            // send all messages so far
             ws.send(JSON.stringify({messages: this.messages}));
+        });
+    }
+
+    private forwardMessage(message: string): void {
+        this.messages.push(message);
+        this.wss.clients.forEach((client) => {
+            client.send(JSON.stringify({message : message}));
         });
     }
 

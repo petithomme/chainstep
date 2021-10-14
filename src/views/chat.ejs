@@ -19,15 +19,12 @@
         // receive message from server
         ws.onmessage = function (message) {
             const data = JSON.parse(message.data);
-            console.log("data : " + data);
             var display = document.getElementById("conversation");
             if (data.messages) {
-                console.log("data.messages : " + data.messages);
                 data.messages.forEach(message => {
                     display.innerHTML += message + "<br />";
                 });
             } else if (data.message) {
-                console.log("data.message : " + data.message);
                 display.innerHTML += data.message + "<br />";
             }
         };

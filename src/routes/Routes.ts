@@ -1,12 +1,9 @@
 import {LoginController} from "../controllers/LoginController";
 import {Express, Request, Response} from "express";
-import {ChatController} from "../controllers/ChatController";
 
 module.exports = function(app: Express) {
 
     const loginController: LoginController = new LoginController();
-    const chatController: ChatController = new ChatController();
-    chatController.createChatsServer();
 
     app.post('/createUser', async function (req: Request, res: Response) {
         await loginController.createUser(<string>req.body.username, <string>req.body.password, <string>req.body.email);
@@ -28,7 +25,6 @@ module.exports = function(app: Express) {
             // todo add error message
             res.redirect('/');
         } else {
-
             res.render("chat");
         }
     }
