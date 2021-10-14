@@ -1,0 +1,49 @@
+#messages {
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+#inputMessage {
+    height: 5%;
+    width: 100%;
+}
+
+#messages, #inputMessage {
+    width: 85%;
+    margin-left: 15%;
+    background-color: aliceblue;
+    border-color: rgb(0, 40, 102);
+    border-width: 0.1rem;
+    border-style: solid;
+}
+
+#inputMessage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.display {
+    margin-left: 2%;
+    margin-bottom: 1%;
+    margin-top: 1%;
+    width: 100%;
+    height: 60%;
+}
+
+#message {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    background: none;
+}
+
+#conversation {
+    line-height: 1.5;
+}
+
+

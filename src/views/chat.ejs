@@ -2,18 +2,59 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="../../public/css/global.css">
+    <link rel="stylesheet" href="../../public/css/chat.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <script>
+        // socket code
+        const ws = new WebSocket('ws://localhost:5001');
+
+        // error from server
+        ws.onerror = (error) => {
+            alert("An error happened");
+        };
+        // receive message from server
+        ws.onmessage = function (message) {
+            const data = JSON.parse(message.data);
+            console.log("data : " + data);
+            var display = document.getElementById("conversation");
+            if (data.messages) {
+                console.log("data.messages : " + data.messages);
+                data.messages.forEach(message => {
+                    display.innerHTML += message + "<br />";
+                });
+            } else if (data.message) {
+                console.log("data.message : " + data.message);
+                display.innerHTML += data.message + "<br />";
+            }
+        };
+    </script>
 
     <div class="container">
-        <div>
-            show the chat here
+        <div id="messages">
+            <div class="display" id="conversation">
+            </div>
         </div>
-
+        <div id="inputMessage">
+            <div class="display">
+                <input id="message"/>
+            </div>
+        </div>
     </div>
+
+    <script>
+        var input = document.getElementById("message");
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                ws.send(input.value);
+                input.value = "";
+            }
+        });
+    </script>
 
 </body>
 </html>
