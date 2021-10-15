@@ -15,8 +15,7 @@ export class LoginController {
             const queryResult: ILogin[] = await MysqlConnection.instance.query(query, [username]);
             if (queryResult.length == 1) {
                 const hash: string = bcrypt.hashSync(password, queryResult[0].salt);
-                const loggedIn: boolean = bcrypt.compareSync(queryResult[0].password, hash);
-                if (loggedIn) {
+                if (queryResult[0].password == hash) {
                     result = uuidv4();
                     Cache.instance.set(username, result);
                 }

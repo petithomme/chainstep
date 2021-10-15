@@ -25,7 +25,10 @@ module.exports = function(app: Express) {
             // todo add error message
             res.redirect('/');
         } else {
-            res.render("chat");
+            res.render("chat", {
+                userName : <string>req.body.username,
+                token
+            });
         }
     }
 }

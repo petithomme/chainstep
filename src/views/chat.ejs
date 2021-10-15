@@ -11,7 +11,6 @@
     <script>
         // socket code
         const ws = new WebSocket('ws://localhost:5001');
-
         // error from server
         ws.onerror = (error) => {
             alert("An error happened");
@@ -43,11 +42,15 @@
     </div>
 
     <script>
-        var input = document.getElementById("message");
+        const input = document.getElementById("message");
         input.addEventListener("keyup", function(event) {
             if (event.keyCode === 13) {
                 event.preventDefault();
-                ws.send(input.value);
+                ws.send(JSON.stringify({
+                    message : input.value,
+                    userName: <%- JSON.stringify(userName) %>,
+                    token: <%- JSON.stringify(token) %>
+                }));
                 input.value = "";
             }
         });

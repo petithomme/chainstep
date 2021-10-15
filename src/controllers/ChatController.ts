@@ -1,5 +1,6 @@
 import * as WebSocket from 'ws';
 import {RawData, WebSocketServer} from 'ws';
+import {Cache} from "../cache/Cache";
 
 export class ChatController {
 
@@ -11,8 +12,12 @@ export class ChatController {
             port: 5001, perMessageDeflate: false
         });
         this.wss.on('connection', (ws: WebSocket) => {
-            ws.on('message', (message: RawData) => {
-                this.forwardMessage(message.toString());
+            ws.on('message', (data: RawData) => {
+                const obj = JSON.parse(data.toString());
+                if (Cache.instance.get(obj['userName']) === obj['token']) {
+                    this.forwardMessage(`${obj['userName']} - ${obj['message']}`);
+                }
+                //
             });
             // send all messages so far
             ws.send(JSON.stringify({messages: this.messages}));
