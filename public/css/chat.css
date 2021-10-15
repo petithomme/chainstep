@@ -7,7 +7,7 @@
 }
 
 #inputMessage {
-    height: 5%;
+    height: 4.5%;
     width: 100%;
 }
 
@@ -44,6 +44,11 @@
 
 #conversation {
     line-height: 1.5;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    align-content: flex-end;
+    flex-wrap: wrap;
 }
 
 
