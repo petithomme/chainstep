@@ -14,7 +14,7 @@ export class ChatController {
         this.wss.on('connection', (ws: WebSocket) => {
             ws.on('message', (data: RawData) => {
                 const obj = JSON.parse(data.toString());
-                if (Cache.instance.get(obj['userName']) === obj['token']) {
+                if (obj['token'] && Cache.instance.get(obj['userName']) === obj['token']) {
                     this.forwardMessage(`${obj['userName']} - ${obj['message']}`);
                 }
                 //

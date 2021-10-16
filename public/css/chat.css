@@ -2,7 +2,7 @@
     height: 95%;
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: flex-end;
     align-items: flex-start;
 }
@@ -19,6 +19,10 @@
     border-color: rgb(0, 40, 102);
     border-width: 0.1rem;
     border-style: solid;
+}
+
+#logout {
+    cursor: pointer;
 }
 
 #inputMessage {

@@ -27,6 +27,12 @@ export class LoginController {
         return result;
     }
 
+    public async logout(userName: string, token: string): Promise<void> {
+        if (token && Cache.instance.get(userName) === token) {
+            Cache.instance.set(userName, "");
+        }
+    }
+
     public async createUser(username: string, password: string, email: string): Promise<void> {
         const exist: boolean = await this.userExists(username);
         if (exist) {

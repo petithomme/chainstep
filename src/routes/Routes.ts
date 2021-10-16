@@ -20,6 +20,12 @@ module.exports = function(app: Express) {
         res.render("login", {url: req.protocol + '://' + req.get('host')});
     });
 
+    app.get('/logout', function (req: Request, res: Response) {
+        loginController.logout(<string>req.query.userName, <string>req.query.token);
+        console.log("logout");
+        res.render("login", {url: req.protocol + '://' + req.get('host')});
+    });
+
     function handleLoginProcess(req: Request, res: Response, token: string): void {
         if (!token) {
             // todo add error message
@@ -27,7 +33,8 @@ module.exports = function(app: Express) {
         } else {
             res.render("chat", {
                 userName : <string>req.body.username,
-                token
+                token,
+                url: req.protocol + '://' + req.get('host')
             });
         }
     }
