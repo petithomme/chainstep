@@ -3,6 +3,8 @@ import {MysqlConnection} from "../databases/MysqlConnection";
 import {ILogin} from "../interfaces/ILogin";
 import {Cache} from "../cache/Cache";
 import { v4 as uuidv4 } from 'uuid';
+import {User} from "../models/User";
+import {SocketAssociated} from "../models/SocketAssociated";
 
 export class LoginController {
 
@@ -17,7 +19,7 @@ export class LoginController {
                 const hash: string = bcrypt.hashSync(password, queryResult[0].salt);
                 if (queryResult[0].password == hash) {
                     result = uuidv4();
-                    Cache.instance.set(username, result);
+                    Cache.instance.set(username, new User(username, result, queryResult[0].language ));
                 }
             } else {
                 console.log("queryResult is not 1");
@@ -28,25 +30,25 @@ export class LoginController {
     }
 
     public async logout(userName: string, token: string): Promise<void> {
-        if (token && Cache.instance.get(userName) === token) {
+        if (token && Cache.instance.get(userName).sessionToken === token) {
             Cache.instance.set(userName, "");
         }
     }
 
-    public async createUser(username: string, password: string, email: string): Promise<void> {
+    public async createUser(username: string, password: string, email: string, language: string): Promise<void> {
         const exist: boolean = await this.userExists(username);
         if (exist) {
             // todo add popup
         } else {
             const salt: string = await bcrypt.genSalt(10);
             const hashedPassword: string = await bcrypt.hashSync(password, salt);
-            await this.insertUser(username, hashedPassword, salt, email);
+            await this.insertUser(username, hashedPassword, salt, email, language);
         }
     }
 
-    private async insertUser(username: string, password: string, salt: string, email: string): Promise<void> {
-        const query: string = "INSERT INTO users (`username`, `password`, `salt`, `email`) VALUES (?, ?, ?, ?)"
-        await MysqlConnection.instance.query(query, [username,password, salt, email]);
+    private async insertUser(username: string, password: string, salt: string, email: string, language: string): Promise<void> {
+        const query: string = "INSERT INTO users (`username`, `password`, `salt`, `email`, `language`) VALUES (?, ?, ?, ?, ?)"
+        await MysqlConnection.instance.query(query, [username,password, salt, email, language]);
     }
 
     private async userExists(userName: string): Promise<boolean> {

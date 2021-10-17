@@ -17,7 +17,7 @@ export class Cache {
         return this.nodeCache.get(key);
     }
 
-    public set(key: string, value: string): void {
+    public set(key: string, value: any): void {
         this.nodeCache.set(key, value);
     }
 
