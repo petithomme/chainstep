@@ -26,16 +26,27 @@ export class ChatController {
                 const cached: User = Cache.instance.get(userName);
                 if (token == cached.sessionToken) {
                     this.clients[userName] = new SocketAssociated(cached, ws);
-                    ws.on('message', (data: RawData) => {
-                        const obj = JSON.parse(data.toString());
-                        this.forwardMessage(`${obj['userName']}`, `${obj['message']}`, cached.language);
-                        //
-                    });
+                    this.addOnSocket(ws, cached.language);
                     // send all messages so far
                     const messages: string[] = await this.getAllMessagesHistory(cached.language, this.messages);
                     ws.send(JSON.stringify({messages: messages}));
                 }
             }
+        });
+    }
+
+    private addOnSocket(ws: WebSocket, language: string): void {
+        ws.on('message', (data: RawData) => {
+            const obj = JSON.parse(data.toString());
+            this.forwardMessage(`${obj['userName']}`, `${obj['message']}`, language);
+        });
+        ws.on('close', (data: RawData) => {
+            Object.entries(this.clients).forEach( async ([key, value]) => {
+                const sa: SocketAssociated = value;
+                if (sa.socket == ws) {
+                    Cache.instance.set(sa.user.userName, "");
+                }
+            });
         });
     }
 
@@ -49,7 +60,11 @@ export class ChatController {
     }
 
     private async translateMessage(message: string, baseLanguage: string, targetLanguage: string): Promise<string> {
-        return await this.translate(message, baseLanguage, targetLanguage);
+        if (baseLanguage != targetLanguage) {
+            return await this.translate(message, baseLanguage, targetLanguage);
+        } else {
+            return message;
+        }
     }
 
     private async forwardMessage(userName: string, message: string, baseLanguage: string): Promise<void> {

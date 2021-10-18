@@ -27,7 +27,7 @@ module.exports = function(app: Express) {
 
     function handleLoginProcess(req: Request, res: Response, token: string): void {
         if (!token) {
-            // todo add error message
+            console.log("token error");
             res.redirect('/');
         } else {
             res.render("chat", {

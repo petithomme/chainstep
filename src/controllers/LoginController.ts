@@ -4,14 +4,13 @@ import {ILogin} from "../interfaces/ILogin";
 import {Cache} from "../cache/Cache";
 import { v4 as uuidv4 } from 'uuid';
 import {User} from "../models/User";
-import {SocketAssociated} from "../models/SocketAssociated";
 
 export class LoginController {
 
     public async login(username: string, password: string): Promise<string> {
         let result: string = "";
         if (!username || !password) {
-            //todo log error
+            console.log("username or password incorrect");
         } else {
             const query: string = "SELECT * from users where userName =?";
             const queryResult: ILogin[] = await MysqlConnection.instance.query(query, [username]);
@@ -23,7 +22,6 @@ export class LoginController {
                 }
             } else {
                 console.log("queryResult is not 1");
-                //todo log error
             }
         }
         return result;
@@ -38,7 +36,7 @@ export class LoginController {
     public async createUser(username: string, password: string, email: string, language: string): Promise<void> {
         const exist: boolean = await this.userExists(username);
         if (exist) {
-            // todo add popup
+            console.log("User already exists");
         } else {
             const salt: string = await bcrypt.genSalt(10);
             const hashedPassword: string = await bcrypt.hashSync(password, salt);
