@@ -1,7 +1,8 @@
 export class Message {
-    private message: string;
-    private username: string;
-    private language: string;
+
+    public message: string;
+    public username: string;
+    public language: string;
 
     constructor(message: string, userName: string, language: string) {
         this.message = message;

@@ -17,7 +17,7 @@ export class ChatController {
         this.wss = new WebSocketServer({
             port: 5001, perMessageDeflate: false
         });
-        this.wss.on('connection', (ws: WebSocket, request: IncomingMessage) => {
+        this.wss.on('connection', async (ws: WebSocket, request: IncomingMessage) => {
 
             if (request.url) {
                 const url: URL = new URL(request.headers.origin+request.url);
@@ -32,20 +32,34 @@ export class ChatController {
                         //
                     });
                     // send all messages so far
-                    //ws.send(JSON.stringify({messages: this.messages}));
+                    const messages: string[] = await this.getAllMessagesHistory(cached.language, this.messages);
+                    ws.send(JSON.stringify({messages: messages}));
                 }
             }
         });
     }
 
+    private async getAllMessagesHistory(targetLanguage: string, messages: Message[]): Promise<string[]> {
+        const result: string[] = [];
+        for (const message of messages) {
+            const traduction: string = await this.translateMessage(message.message, message.language, targetLanguage);
+            result.push(`${message.username} : ${traduction}`);
+        };
+        return result;
+    }
+
+    private async translateMessage(message: string, baseLanguage: string, targetLanguage: string): Promise<string> {
+        return await this.translate(message, baseLanguage, targetLanguage);
+    }
+
     private async forwardMessage(userName: string, message: string, baseLanguage: string): Promise<void> {
         const translations: object = {};
-        this.messages.push(new Message(message, userName, ""));
+        this.messages.push(new Message(message, userName, baseLanguage));
 
         Object.entries(this.clients).forEach( async ([key, value]) => {
                 const sa: SocketAssociated = value;
                 if (!translations[sa.user.language]) {
-                    translations[sa.user.language] = await this.translate(message, baseLanguage, sa.user.language);
+                    translations[sa.user.language] = await this.translateMessage(message, baseLanguage, sa.user.language);
                 }
                 sa.socket.send(JSON.stringify({message : `${userName} : ${translations[sa.user.language]}`}));
             }
