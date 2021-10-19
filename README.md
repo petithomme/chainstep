@@ -16,6 +16,7 @@
 
 ## Seems to improve : 
 
+- Migrations not manual
 - Add unit tests
 - Being able to add / remove chats
    
