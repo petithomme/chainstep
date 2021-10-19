@@ -19,4 +19,5 @@
 - Migrations not manual
 - Add unit tests
 - Being able to add / remove chats
+- Transform models to interfaces if no more code needed
    
