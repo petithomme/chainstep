@@ -10,6 +10,7 @@
 </head>
 <body>
     <script>
+        window.history.pushState("", "Chat", "/chat");
         // socket code
         const ws = new WebSocket(`ws://localhost:5001?userName=${<%- JSON.stringify(userName) %>}&token=${<%- JSON.stringify(token) %>}`);
 
