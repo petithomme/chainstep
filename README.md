@@ -8,7 +8,7 @@
     - CREATE TABLE users (userId int AUTO_INCREMENT PRIMARY KEY, username varchar(25) NOT NULL, password varchar(100) NOT NULL, salt varchar(32) NOT NULL, email varchar(100) NOT NULL, language varchar(2) NOT NULL);
     
 - Run libreTranslate with this docker command : 
-    - docker run -ti --rm -p 5000:5000 libretranslate/libretranslate (or install it from https://pythonrepo.com/repo/uav4geo-LibreTranslate)
+    - docker run -ti --rm -p 6000:5000 libretranslate/libretranslate (or install it from https://pythonrepo.com/repo/uav4geo-LibreTranslate)
     
 - npm install 
 - npm start
