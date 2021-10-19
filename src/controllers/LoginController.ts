@@ -19,6 +19,8 @@ export class LoginController {
                 if (queryResult[0].password == hash) {
                     result = uuidv4();
                     Cache.instance.set(username, new User(username, result, queryResult[0].language ));
+                } else {
+                    console.log("Password or login is incorrect");
                 }
             } else {
                 console.log("queryResult is not 1");

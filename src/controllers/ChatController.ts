@@ -46,6 +46,7 @@ export class ChatController {
                 const sa: SocketAssociated = value;
                 if (sa.socket == ws) {
                     Cache.instance.set(sa.user.userName, "");
+                    sa.socket.close();
                 }
             });
         });
