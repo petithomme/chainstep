@@ -14,7 +14,7 @@
 - npm start
 - connect to http://localhost:5000/
 
-## Seems to improve : 
+## Things to improve : 
 
 - Migrations not manual
 - Add unit tests
