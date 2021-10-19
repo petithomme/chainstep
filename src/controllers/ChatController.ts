@@ -12,6 +12,7 @@ export class ChatController {
     private messages: Message[] = [];
     private wss: WebSocketServer;
     private clients: object = {};
+    private chats: object = {}
 
     constructor() {
         this.wss = new WebSocketServer({

@@ -31,16 +31,23 @@
         };
     </script>
 
-    <div class="container">
-        <div id="messages">
-            <div class="display" id="conversation">
-            </div>
-            <img id="logout" src="public/images/close_btn.png" onclick="logout()" />
+    <div id="container">
+        <div id="firstRow">
+<!--           todo Add buttons-->
         </div>
-        <div id="inputMessage">
-            <div class="display">
-                <input id="message"/>
+        <div id="middleRow">
+            <div id="messages">
+                <div class="display" id="conversation">
+                </div>
             </div>
+            <div id="inputMessage">
+                <div class="display">
+                    <input id="message"/>
+                </div>
+            </div>
+        </div>
+        <div id="lastRow">
+            <img id="logout" src="public/images/close_btn.png" onclick="logout()" />
         </div>
     </div>
 
